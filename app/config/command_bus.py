@@ -1,0 +1,8 @@
+from pymessagebus import CommandBus
+
+from eventsource.models.PayrollRun.commands import CreatePayrollRunCommand, RemoveEmployeeFromPayrollRunCommand
+from eventsource.models.PayrollRun.handlers import handle_create_payroll_run, handle_remove_employee_from_payroll_run
+
+command_bus = CommandBus()
+command_bus.add_handler(CreatePayrollRunCommand, handle_create_payroll_run)
+command_bus.add_handler(RemoveEmployeeFromPayrollRunCommand, handle_remove_employee_from_payroll_run)
