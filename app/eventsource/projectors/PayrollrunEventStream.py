@@ -23,6 +23,11 @@ class PayrollRunEventStream(Application):
         payroll_run.add_employees(employees)
         self.save(payroll_run)
 
+    def approve_payroll_run(self, payroll_run_id):
+        payroll_run: PayrollRun = self.repository.get(payroll_run_id)
+        payroll_run.approve()
+        self.save(payroll_run)
+
     def get_payroll_run(self, payroll_run_id):
         payroll_run: PayrollRun = self.repository.get(payroll_run_id)
         return {"state": payroll_run.state, "employees": payroll_run.employees}
@@ -35,3 +40,4 @@ class PayrollRunEventStream(Application):
 
     def construct_transcoder(self) -> Transcoder:
         return OrjsonTranscoder()
+
